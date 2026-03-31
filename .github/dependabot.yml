@@ -9,7 +9,3 @@ updates:
     directory: "/"            # location of your Dockerfile(s) or docker-compose.yml
     schedule:
       interval: "daily"
-  - package-ecosystem: "pip"
-    directory: "/src"            # location of requirements.txt
-    schedule:
-      interval: "daily"
