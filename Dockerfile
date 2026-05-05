@@ -1,7 +1,7 @@
 ###############################################
 # Stage 1 — Builder (OpenVINO dev + Go + source)
 ###############################################
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:26.04 AS builder
 
 # Install dependencies
 ENV DEBIAN_FRONTEND=noninteractive
@@ -35,7 +35,7 @@ RUN go build -o /usr/local/bin/ollama .
 ########################################################
 # Stage 2 — Backend Extractor (strip dev-only artifacts)
 ########################################################
-FROM ubuntu:24.04 AS backend_extractor
+FROM ubuntu:26.04 AS backend_extractor
 
 # Copy only the built Ollama binary
 COPY --from=builder /usr/local/bin/ollama /ollama/ollama
@@ -46,7 +46,7 @@ COPY --from=builder /usr/local/bin/ollama /ollama/ollama
 ###############################################
 # Stage 3 — Runtime (OpenVINO runtime + Ollama)
 ###############################################
-FROM ubuntu:24.04 AS runtime
+FROM ubuntu:26.04 AS runtime
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
